@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="my-5 p-5 auth-form">
+                <h3 class="text-center">{{ isLoginMode ? "Login": "SignUp" }}</h3>
+                <div *ngIf="signupMessage" class="alert alert-succes">
+                    {{ signupMessage }}
+                </div>
+                <form #authForm="ngForm" (ngSubmit)="submitAuthForm(authForm.value)">
+                        <div *ngIf="!isLoginMode" class="form-group">
+                            <label>Name</label>
+                            <input type="text" [class.is_invalid]="name.invalid && name.touched"
+                            ngModel name="name" class="form-control" required #name="ngModel">
+                            <small *ngIf="name.invalid && name.touched && !errorMessage"
+                            class="text-danger">The name field is required</small>
+                            <small *ngIf="errorMessage && errorMessage.name != undefined && errorMessage.name.length > 0"
+                            class="text-danger">{{ errorMessage.name[0] }}</small>
+                        </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" ngModel name="email" [class.is-invalid]="email.invalid && email.touched" 
+                        class="form-control" required #email="ngModel">
+                        <small *ngIf="email.invalid && email.touched && !errorMessage"
+                        class="text-danger">The email field is required</small>
+                        <small *ngIf="errorMessage && errorMessage.email != undefined && errorMessage.email.length > 0"
+                        class="text-danger">{{ errorMessage.email[0] }}</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>password</label>
+                        <input type="text" ngModel name="password" [class.is-invalid]="password.invalid && password.touched" 
+                         class="form-control" required #password="ngModel">
+                        <small *ngIf="password.invalid && password.touched && !errorMessage"
+                        class="text-danger">The Password field is required</small>
+                        <small *ngIf="errorMessage && errorMessage.password != undefined && errorMessage.password.length > 0"
+                        class="text-danger">{{ errorMessage.password[0] }}</small>
+                    </div>
+
+                    <div *ngIf="!isLoginMode" class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="text" ngModel name="password_confirmation" 
+                        [class.is-invalid]="password_confirmation.invalid && password_confirmation.touched"  
+                        class="form-control" required #password_confirmation="ngModel">
+                        <small *ngIf="password_confirmation.invalid && password_confirmation.touched && !errorMessage"
+                        class="text-danger">The password_confirmation is required</small>
+                        <small *ngIf="errorMessage && errorMessage.password != undefined && errorMessage.password.length > 0"
+                        class="text-danger">{{ errorMessage.password[1] }}</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">{{ isLoginMode ? "Signup": "Login" }}</button>
+                </form>
+                <p class="text-center mt-3">Switch to <a (click)="onSwitchMode()">{{ isLoginMode ? "SignUp": "Login" }}</a></p>
+            </div>
+        </div>
+    </div>
+</div>

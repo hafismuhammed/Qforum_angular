@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form #questionForm="ngForm" (ngSubmit)="askQuestion(questionForm.value)">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input 
+                    type="text" 
+                    class="form-control"
+                    name="title" 
+                    #title="ngModel"
+                     [class.is-invalid]="title.invalid && title.touched"
+                     required ngModel>
+                     <small
+                      *ngIf="title.invalid && title.touched" 
+                      class="text-danger">
+                         Title field is required</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Question</label>
+                    <textarea 
+                    type="text"
+                     class="form-control"
+                     name="question"
+                     rows="6"
+                     #question="ngModel"
+                     [class.is-invalid]="question.invalid && question.touched"
+                    required ngModel
+                     ></textarea>
+                     <small
+                      *ngIf="question.invalid && question.touched" 
+                      class="text-danger">
+                        Title field is required</small>
+                </div>
+                <button [disabled]="questionForm.invalid" class="btn btn-primary float-right">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

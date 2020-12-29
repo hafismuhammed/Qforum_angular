@@ -9,6 +9,12 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListItemComponent } from './components/home/list-item/list-item.component';
 import { PaginationComponent } from './components/home/pagination/pagination.component';
+import { AskQuestionComponent } from './components/ask-question/ask-question.component';
+import { ShowQuestionComponent } from './components/show-question/show-question.component';
+import { MyQuestionComponent } from './components/my-question/my-question.component';
+import { MyAnswerComponent } from './components/my-answer/my-answer.component';
+import { EditQuestionComponent } from './components/show-question/edit-question/edit-question.component';
+import { EditAnswerComponent } from './components/show-question/edit-answer/edit-answer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +22,13 @@ import { PaginationComponent } from './components/home/pagination/pagination.com
     AuthComponent,
     HomeComponent,
     ListItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    AskQuestionComponent,
+    ShowQuestionComponent,
+    MyQuestionComponent,
+    MyAnswerComponent,
+    EditQuestionComponent,
+    EditAnswerComponent
   ],
   imports: [
     BrowserModule,

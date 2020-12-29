@@ -15,7 +15,7 @@ export class AuthService {
     private router: Router,
   ) { }
 
-  user = new BehaviorSubject(null);
+  user = new BehaviorSubject<User>(null);
 
   apiHost = "http://forum.mashuptest.com/api";
 
@@ -41,7 +41,7 @@ export class AuthService {
     return this.http.post(url, body.toString(),{
       headers: this.headers
     }).pipe(
-      tap((data) => {
+      tap((data: any) => {
         const loginResp = {
           token: data.token,
           user: {
@@ -64,6 +64,16 @@ export class AuthService {
     localStorage.removeItem('user');
   }
   
+  autoLogin() {
+    const userdet: User = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!userdet) {
+      this.user.next(null);
+      return false;
+    } else {
+      this.user.next(userdet);
+      return true;
+    }
+  }
 }
 
 

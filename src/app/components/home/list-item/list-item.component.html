@@ -1,1 +1,20 @@
-<p>list-item works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card my-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4 class="text-center">{{ item.likes }}</h4>
+                            <p class="text-center">Likes</p>
+                        </div>
+                        <div class="col-md-8">
+                            <a routerLink="/question/{{ item.id }}" class="card-link">{{ item.title }}</a>
+                            <p>{{ item.question }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

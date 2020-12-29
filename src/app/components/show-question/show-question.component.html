@@ -1,0 +1,95 @@
+<div *ngIf="!isLoadding" class="container">
+    <app-edit-question
+    (eddited)="getQuestion(questionData.id)"
+    (close)="showEditQuestionModal()"
+    *ngIf="editQuestion"
+    [id]="questionData.id"
+    ></app-edit-question>
+    <app-edit-answer
+    *ngIf="editAnswer"
+    (eddited)="getQuestion(questionData.id)"
+    (close)="showEditAnswerModal()"
+    [answer]="editAnswerValue"
+    [answerId]="editAnswerId"
+    ></app-edit-answer>
+    <div class="row mt-5">
+        <div class="col-md-10 offset-md-1">
+            <h2>{{ questionData.title }}</h2>
+            <small class="text-primary">
+                Ask on {{ questionData.created_at | date: "fullDate" }}
+            </small>
+            <small class="float-right text-primary">
+                Asked by: {{ questionData.user.name }}
+            </small>
+            <p class="mt-3">{{ questionData.question }}</p>
+            <div class="float-right">
+                <button 
+                class="btn btn-sm btn-danger mr-2"
+                *ngIf="questionData.user_id == userId"
+                (click)="deleteQuestion(questionData.id)">
+                    delete question
+                </button>
+                <button 
+                class="btn btn-sm btn-warning"
+                *ngIf="questionData.user_id == userId"
+                (click)="showEditQuestionModal()">
+                    edit question
+                </button>
+        </div>
+        <h5>{{ questionData.answers.length }} Answers</h5><hr/>
+    </div>
+</div>
+<div class="row" *ngFor="let answer of questionData.answers.reverse()">
+    <div class="col-md-8 offset-md-2">
+        <p>{{ answer.answer }}</p>
+        <small class="text-primary">
+            Answered on {{ answer.created_at | date: "fullDate" }}</small>
+        <small class="text-primary float-right">
+            Answered by: {{ answer.user.name }}</small>
+        <div class="row">
+            <div class="col-md-12">
+                <button 
+                class="btn btn-sm btn-danger float-left"
+                *ngIf="answer.user_id == userId"
+                (click)="deleteAnswer(answer.id)">
+                Delete Ans:</button>
+                <button 
+                class="btn btn-sm btn-warning float-right"
+                *ngIf="answer.user_id == userId"
+                (click)="showEditAnswerModal(answer.answer, answer.id)"
+                >
+                Edit Ans:</button>
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <hr/>
+        <form 
+        #answerForm="ngForm"
+         (ngSubmit)="submitAnswer(answerForm.value, answerForm)">
+            <div class="form-group">
+                <label>Your Answer</label>
+                <textarea 
+                name="answer"
+                 id="answer" 
+                 rows="6"
+                 class="form-control"
+                 #answer="ngModel"
+                 [class.is-invalid]="answer.invalid && answer.touched"
+                 required ngModel
+                 placeholder="Enter Your answer"
+                 ></textarea>
+                 <small *ngIf="answerForm.invalid && answer.invalid && answer.touched" class="text-dander">
+                     Answer is required</small>
+            </div>
+            <button class="btn btn-primary float-right mt-3 mb-5">
+                Submit Answer
+            </button>
+        </form>
+        <h5 *ngIf="!isLoggedIn" class="text-danger text-center">Login To Answer</h5>
+    </div>
+</div>
+</div>

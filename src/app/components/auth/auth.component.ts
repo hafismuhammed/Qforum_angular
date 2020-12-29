@@ -26,10 +26,10 @@ export class AuthComponent implements OnInit {
     this.errorMessage = null;
   }
 
-  submitAuthForm(data) {
+  submitAuthForm(data: any) {
     console.log(data);
     if(this.isLoginMode) {
-      this.authService.logIn(data.name, data.email)
+      this.authService.logIn(data.email, data.password)
       .subscribe(
         (res) => {
           this.router.navigate(['/']);

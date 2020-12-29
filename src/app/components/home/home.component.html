@@ -1,1 +1,37 @@
-<p>home works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="row">
+                <div class="col-md-2 ">
+                    <button class="btn btn-success" *ngIf="isLoggedIn" routerLink="/askquestion">
+                        Ask Questions
+                    </button>
+                </div>
+                <form #searchForm="ngForm" (ngSubmit)="searchFormSubmit(searchForm.value)" class="col-md-10">
+                    <div class="row">
+                        <div class=" form froup col-md-8">
+                            <input type="text" 
+                            class="form-control"
+                             width="100" 
+                             id="keyword"
+                             placeholder="Search here..."
+                             name="keyword"
+                             required
+                             ngModel
+                             #keyword="ngModel"
+                             >
+                        </div>
+                        <div class="col-md-2">
+                            <button [disabled]="searchForm.invalid" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div><hr>
+        </div>
+    </div>
+</div>
+
+<div *ngFor="let question of listQuestions">
+    <app-list-item [question]="question"></app-list-item>
+</div>
+<app-pagination (pageNumberEmitter)="paginatedResult($event)" [questionResponse]="questionResponse"></app-pagination>

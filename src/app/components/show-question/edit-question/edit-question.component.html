@@ -1,0 +1,34 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+    <form #editQuestion="ngForm" (ngSubmit)="editQuestionSubmit(editQuestion.value)">
+        <div class="form-group">
+            <label>Title</label>
+            <input 
+            type="text" 
+            class="form-control"
+            [(ngModel)]="titleValue"
+            #title="ngModel"
+            name="title"
+            required>
+            <small *ngIf="title.invalid && title.touched" class="text-danger">
+                Title is required</small>
+        </div>
+        <div class="form-group">
+            <label>Question</label>
+            <textarea
+            type="text" 
+            class="form-control"
+            [(ngModel)]="questionValue"
+            #question="ngModel"
+            name="question"
+            required></textarea>
+            <small *ngIf="question.invalid && question.touched" class="text-danger">
+                Question is required</small>
+        </div>
+        <button [disabled]="editQuestion.invalid" class="btn btn-success mt-1">Edit</button>
+
+    </form>
+    <div class="alert-box-actions">
+        <button class="btn btn-primary" (click)="onClose()">Close</button>
+    </div>
+</div>
